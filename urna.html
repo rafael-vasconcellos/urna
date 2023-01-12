@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        body {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        p {
+            margin-block-start: 0;
+            margin-block-end: 0;
+        }
+
+        .container {
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            width: 950px;
+            height: 80%;
+            gap: 4vw;
+            padding: 0% 3%;
+
+            position: fixed;
+            right: 1vw;
+            z-index: 1;
+        }
+
+        .display {
+            background-color: gray;
+            width: 600px;
+            height: 410px;
+            font-size: 25px;
+            font-weight: inherit;
+            padding: 10px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5vh;
+            position: relative;
+
+        }
+
+        .display_input {
+            justify-content: center;
+            position: absolute;
+            bottom: 10vh;
+        }
+
+        .keyboard {
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            height: 85%;
+            border: 15px solid black;
+            box-sizing: border-box;
+        }
+
+        .numpad {
+            color: inherit;
+            font-weight: inherit;
+            font-size: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            border: 1px solid white;
+            width: 120px;
+            height: 60px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            width: fit-content;
+        }
+
+        .display > .row {
+            width: 100%;
+        }
+
+        .n-branco {
+            background-color: white;
+            color: black;
+        }
+
+        .n-corrige {
+            background-color: red;
+            color: black;
+            border: 0px;
+        }
+
+        .n-confirma {
+            background-color: lime;
+            color: black;
+            border: 0px;
+        }
+
+        .input {
+            border: 2px solid white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .user-info {
+            display: flex;
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: normal;
+            align-items: center;
+        }
+
+        .user-info > p {
+            line-height: 150%;
+        }
+
+        aside {
+            position: absolute;
+            left: 0; top: 0;
+            background-color: white;
+            padding: 10px;
+        }
+
+        body > input[type='checkbox'] {
+            display: none;
+        }
+
+@media screen and (max-width: 1340px) {
+    aside {
+        padding-top: 60px;
+        border-right: 5px solid black;
+        transform: translateX(-300px);
+        z-index: 1;
+
+    }
+
+    .container {
+        position: absolute;
+        left: calc(50% - 517px);
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px;
+        position: absolute;
+        left: 1%;
+        top: 15px;
+        z-index: 2;
+        cursor: pointer;
+    }
+
+    .menu > div {
+        border: 1px solid black;
+        width: 25px;
+    }
+
+    .menu::after, .menu::before {
+        display: block;
+        content: "";
+        border: 1px solid black;
+        width: 25px;
+        position: relative;
+        transition: .3s;
+    }
+
+    #menu:checked ~ .menu::before {
+        transform: rotate(-135deg);
+        top: 5px;
+    }
+
+    #menu:checked ~ .menu::after {
+        transform: rotate(135deg);
+        top: -2px;
+    }
+
+    #menu:checked ~ .menu > div {
+        display: none;
+    }
+
+    #menu:checked ~ aside {
+        transform: translateX(0);
+        transition: transform 0.3s ease-in-out;
+    }
+}
+
+@media screen and (max-width: 1035px) {
+    .container {
+        flex-direction: column;
+        width: 100%;
+        height: fit-content;
+        top: 70px;
+        left: 0;
+        padding: 0;
+    }
+
+    .display {
+        width: 100%;
+    }
+
+    .keyboard {
+        width: 100%;
+    }
+
+    .display > p {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+    </style>
+
+</head>
+<body>
+    <input type="checkbox" id="menu">
+    <label for="menu" class="menu"><div></div></label>
+    <div class="container">
+
+
+        <div class="display">
+            <p class="display-text"></p>
+            <div class="row display_info" style="height: 200px; width: fit-content;"></div>
+            <div class="row display_input"></div>
+        </div>
+
+        <div class="keyboard">
+            <div class="row">
+                <button class="numpad n1">1</button>
+                <button class="numpad n2">2</button>
+                <button class="numpad n3">3</button>
+            </div>
+            <div class="row">
+                <button class="numpad n4">4</button>
+                <button class="numpad n5">5</button>
+                <button class="numpad n6">6</button>
+            </div>
+            <div class="row">
+                <button class="numpad n7">7</button>
+                <button class="numpad n8">8</button>
+                <button class="numpad n9">9</button>
+            </div>
+            <button class="numpad n0">0</button>
+
+            <div class="row">
+                <button class="numpad n-branco">Branco</button>
+                <button class="numpad n-corrige">Corrige</button>
+                <button class="numpad n-confirma">Confirma</button>
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <aside></aside>
+<script src="candidatos.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
